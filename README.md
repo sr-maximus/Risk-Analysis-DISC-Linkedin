@@ -24,10 +24,10 @@ The project aims to extract, analyze, and visualize data from LinkedIn profiles.
 + Horizontal Scaling: The architecture is designed to allow horizontal scaling by distributing Celery workers across multiple machines if necessary.
 
 ### Code Structure:
-+ celery.py: Configures the Celery application with the Redis broker and backend and defines the task request rate.
-+ tasks.py: Defines Celery tasks for extracting LinkedIn data, with error handling and caching to optimize performance.
-+ main.py: Coordinates task execution, performs data analysis, and generates the corresponding visualizations.
-+ requirements.txt: Lists the dependencies required for the project.
++ `celery.py`: Configures the Celery application with the Redis broker and backend and defines the task request rate.
++ `tasks.py`: Defines Celery tasks for extracting LinkedIn data, with error handling and caching to optimize performance.
++ `main.py`: Coordinates task execution, performs data analysis, and generates the corresponding visualizations.
++ `requirements.txt`: Lists the dependencies required for the project.
 
 ### Execution Instructions:
 
@@ -35,7 +35,7 @@ The project aims to extract, analyze, and visualize data from LinkedIn profiles.
 2. Start Redis.
 3. Start the Celery workers.
 4. *(Optional)* Start Flower for monitoring.
-5. Run the main script *main.py*.
+5. Run the main script `main.py`.
 
 ### Security Considerations:
 Ensure that the API tokens are protected and that error handling is robust to prevent the exposure of sensitive information.
@@ -43,18 +43,27 @@ Ensure that the API tokens are protected and that error handling is robust to pr
 ## Step-by-Step Execution Instructions:
 
 ### Install Dependencies:
-Make sure you have an active virtual environment and run: _pip install -r requirements.txt_
+Make sure you have an active virtual environment and run: 
+```
+_pip install -r requirements.txt
+```
 
 ### Start Redis:
 Ensure the Redis server is running.
 
 ### Start the Celery Workers:
-Run in a terminal: _celery -A celery worker --loglevel=info_
+Run in a terminal: 
+```
+celery -A celery worker --loglevel=info
+```
 
 ### Start Flower (optional for monitoring):
-In a separate terminal: _celery -A celery flower_
+In a separate terminal: 
+```
+celery -A celery flower
+```
 
 + Access Flower at http://localhost:5555
 
 ### Run the Main Script:
-Run *main.py* to start data processing and visualization.
+Run `main.py` to start data processing and visualization.
