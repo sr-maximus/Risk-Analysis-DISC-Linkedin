@@ -45,7 +45,7 @@ Ensure that the API tokens are protected and that error handling is robust to pr
 ### Install Dependencies:
 Make sure you have an active virtual environment and run: 
 ```
-_pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 
 ### Start Redis:
