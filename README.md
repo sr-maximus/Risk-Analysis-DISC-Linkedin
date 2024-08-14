@@ -1,4 +1,4 @@
-# Analysis-DISC
+# Risk Analysis DISC LinkedIn
 
 ## Objective:
 The project aims to extract, analyze, and visualize data from LinkedIn profiles. It uses a distributed architecture to efficiently and securely handle requests to the LinkedIn API. The system provides an analysis of internet exposure risk based on the sensitivity of the data shared in profiles, as well as a DISC analysis of the profiles.
