@@ -35,7 +35,7 @@ The project aims to extract, analyze, and visualize data from LinkedIn profiles.
 2. Start Redis.
 3. Start the Celery workers.
 4. *(Optional)* Start Flower for monitoring.
-5. Run the main script main.py.
+5. Run the main script *main.py*.
 
 ### Security Considerations:
 Ensure that the API tokens are protected and that error handling is robust to prevent the exposure of sensitive information.
@@ -57,4 +57,4 @@ In a separate terminal: _celery -A celery flower_
 + Access Flower at http://localhost:5555
 
 ### Run the Main Script:
-Run main.py to start data processing and visualization.
+Run *main.py* to start data processing and visualization.
