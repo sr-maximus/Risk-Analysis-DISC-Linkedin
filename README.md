@@ -1,67 +1,60 @@
 # Analysis-DISC
 
-## Objetivo:
-El proyecto tiene como objetivo la extracción, análisis y visualización de datos de perfiles de LinkedIn. Utiliza una arquitectura distribuida para manejar solicitudes a la API de LinkedIn de manera eficiente y segura. El sistema proporciona análisis del riesgo de exposición en Internet basado en la sensibilidad de los datos compartidos en los perfiles, así como un análisis DISC de los perfiles.
+## Objective:
+The project aims to extract, analyze, and visualize data from LinkedIn profiles. It uses a distributed architecture to efficiently and securely handle requests to the LinkedIn API. The system provides an analysis of internet exposure risk based on the sensitivity of the data shared in profiles, as well as a DISC analysis of the profiles.
 
-## Componentes Principales:
+## Main Components:
 
-### Extracción de Datos:
+### Data Extraction:
++ Celery: Uses Celery, a distributed task library in Python, to manage the extraction of LinkedIn profile data asynchronously and efficiently.
++ LinkedIn API: Connects to the LinkedIn API to obtain profile data using API tokens that rotate to handle rate limits.
++ Cache: Implements a caching system (using cachetools) to temporarily store profile data and reduce the number of requests to the API.
 
-+ Celery: Utiliza Celery, una biblioteca de tareas distribuidas en Python, para gestionar la extracción de datos de perfiles de LinkedIn de manera asíncrona y eficiente.
-+ API de LinkedIn: Conecta con la API de LinkedIn para obtener datos de perfiles utilizando tokens de API que se rotan para manejar las limitaciones de tasa.
-+ Caché: Implementa un sistema de caché (utilizando cachetools) para almacenar temporalmente los datos de los perfiles y reducir la cantidad de solicitudes a la API.
+### Data Analysis:
++ Exposure Risk: Calculates the internet exposure risk for each profile based on the sensitivity of available information, such as professional experience, number of contacts, and the presence of contact information.
++ DISC Analysis: Evaluates profiles according to the DISC model (Dominance, Influence, Steadiness, Conscientiousness) using profile information (professional title and connections).
 
-### Análisis de Datos:
+### Visualization:
++ Heat Map: Generates a heat map showing the correlation between different exposure risk factors.
++ Interaction Network: Creates a network visualization using Plotly to show interactions between profiles, representing each profile as a node and connections as edges.
++ DISC Charts: Produces pie charts for each profile, visualizing the DISC score across different categories.
 
-+ Riesgo de Exposición: Calcula el riesgo de exposición en Internet para cada perfil basándose en la sensibilidad de la información disponible, como la experiencia profesional, el número de contactos, y la presencia de información de contacto.
-+ Análisis DISC: Evalúa los perfiles según el modelo DISC (Dominancia, Influencia, Estabilidad, Conformidad) utilizando la información del perfil (título profesional y conexiones).
+### Monitoring and Scaling:
++ Flower: Uses Flower to monitor the status of Celery workers, allowing for real-time observation of task progress and system performance.
++ Horizontal Scaling: The architecture is designed to allow horizontal scaling by distributing Celery workers across multiple machines if necessary.
 
-### Visualización:
+### Code Structure:
++ celery.py: Configures the Celery application with the Redis broker and backend and defines the task request rate.
++ tasks.py: Defines Celery tasks for extracting LinkedIn data, with error handling and caching to optimize performance.
++ main.py: Coordinates task execution, performs data analysis, and generates the corresponding visualizations.
++ requirements.txt: Lists the dependencies required for the project.
 
-+ Mapa de Calor: Genera un mapa de calor que muestra la correlación entre diferentes factores de riesgo de exposición.
-+ Red de Interacciones: Crea una visualización de red utilizando Plotly para mostrar las interacciones entre los perfiles, representando cada perfil como un nodo y las conexiones como bordes.
-+ Gráficos DISC: Produce gráficos de pastel para cada perfil, visualizando la puntuación DISC en diferentes categorías.
+### Execution Instructions:
 
-### Monitoreo y Escalado:
+1. Install the dependencies.
+2. Start Redis.
+3. Start the Celery workers.
+4. *(Optional)* Start Flower for monitoring.
+5. Run the main script main.py.
 
-+ Flower: Utiliza Flower para monitorear el estado de los trabajadores de Celery, permitiendo observar el progreso de las tareas y el rendimiento del sistema en tiempo real.
-+ Escalado Horizontal: La arquitectura está diseñada para permitir el escalado horizontal distribuyendo los trabajadores de Celery en múltiples máquinas si es necesario.
+### Security Considerations:
+Ensure that the API tokens are protected and that error handling is robust to prevent the exposure of sensitive information.
 
-### Estructura del Código:
+## Step-by-Step Execution Instructions:
 
-+ celery.py: Configura la aplicación Celery con el broker y el backend de Redis, y define la tasa de solicitudes para las tareas.
-+ tasks.py: Define las tareas de Celery para extraer datos de LinkedIn, con manejo de errores y caché para optimizar el rendimiento.
-+ main.py: Coordina la ejecución de tareas, realiza el análisis de datos, y genera las visualizaciones correspondientes.
-+ requirements.txt: Lista las dependencias necesarias para el proyecto.
+### Install Dependencies:
+Make sure you have an active virtual environment and run: _pip install -r requirements.txt_
 
-## Instrucciones para Ejecutar:
+### Start Redis:
+Ensure the Redis server is running.
 
-+ Instalar las dependencias.
-+ Iniciar Redis.
-+ Iniciar los trabajadores de Celery.
-+ **(Opcional)** Iniciar Flower para monitoreo.
-+ Ejecutar el script principal main.py.
+### Start the Celery Workers:
+Run in a terminal: _celery -A celery worker --loglevel=info_
 
-### Consideraciones de Seguridad:
-Asegurarse de que los tokens de API estén protegidos y que el manejo de errores sea robusto para evitar la exposición de información sensible.
+### Start Flower (optional for monitoring):
+In a separate terminal: _celery -A celery flower_
 
-# Instrucciones para Ejecutar Paso a Paso
-### Instalar Dependencias:
-Asegúrate de tener un entorno virtual activo y ejecuta:
-pip install -r requirements.txt
++ Access Flower at http://localhost:5555
 
-### Iniciar Redis:
-Asegúrate de que el servidor Redis esté en funcionamiento.
-
-### Iniciar los Trabajadores de Celery:
-Ejecuta en una terminal:
-celery -A celery worker --loglevel=info
-
-### Iniciar Flower (opcional para monitoreo):
-En una terminal separada:
-celery -A celery flower
-
-Accede a Flower en _http://localhost:5555_
-
-### Ejecutar el Script Principal:
-Ejecuta main.py para iniciar el procesamiento y la visualización de datos.
+### Run the Main Script:
+Run main.py to start data processing and visualization.
