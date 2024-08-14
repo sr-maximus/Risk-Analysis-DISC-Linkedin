@@ -1,0 +1,9 @@
+celery
+redis
+requests
+cachetools
+pandas
+seaborn
+matplotlib
+networkx
+plotly
